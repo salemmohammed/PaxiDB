@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"github.com/salemmohammed/PaxiBFT"
+	"github.com/salemmohammed/PaxiDB"
 	"os"
 	"strconv"
 	"strings"
@@ -28,8 +28,8 @@ func usage() string {
 	return s
 }
 
-var client PaxiBFT.Client
-var admin PaxiBFT.AdminClient
+var client PaxiDB.Client
+var admin PaxiDB.AdminClient
 
 func run(cmd string, args []string) {
 	switch cmd {
@@ -44,7 +44,7 @@ func run(cmd string, args []string) {
 			return
 		}
 		k, _ := strconv.Atoi(args[0])
-		v := admin.Consensus(PaxiBFT.Key(k))
+		v := admin.Consensus(PaxiDB.Key(k))
 		fmt.Println(v)
 
 	case "crash":
@@ -52,7 +52,7 @@ func run(cmd string, args []string) {
 			fmt.Println("crash id time(s)")
 			return
 		}
-		id := PaxiBFT.ID(args[0])
+		id := PaxiDB.ID(args[0])
 		time, err := strconv.Atoi(args[1])
 		if err != nil {
 			fmt.Println("second argument should be integer")
@@ -70,9 +70,9 @@ func run(cmd string, args []string) {
 			fmt.Println("time argument should be integer")
 			return
 		}
-		ids := make([]PaxiBFT.ID, 0)
+		ids := make([]PaxiDB.ID, 0)
 		for _, s := range args[1:] {
-			ids = append(ids, PaxiBFT.ID(s))
+			ids = append(ids, PaxiDB.ID(s))
 		}
 		admin.Partition(time, ids...)
 
@@ -87,22 +87,22 @@ func run(cmd string, args []string) {
 }
 
 func main() {
-	PaxiBFT.Init()
+	PaxiDB.Init()
 
 	if *master != "" {
-		PaxiBFT.ConnectToMaster(*master, true, PaxiBFT.ID(*id))
+		PaxiDB.ConnectToMaster(*master, true, PaxiDB.ID(*id))
 	}
 
-	admin = PaxiBFT.NewHTTPClient(PaxiBFT.ID(*id))
+	admin = PaxiDB.NewHTTPClient(PaxiDB.ID(*id))
 
-	client = PaxiBFT.NewHTTPClient(PaxiBFT.ID(*id))
+	client = PaxiDB.NewHTTPClient(PaxiDB.ID(*id))
 
 	if len(flag.Args()) > 0 {
 		run(flag.Args()[0], flag.Args()[1:])
 	} else {
 		reader := bufio.NewReader(os.Stdin)
 		for {
-			fmt.Print("PaxiBFT $ ")
+			fmt.Print("PaxiDB $ ")
 			text, _ := reader.ReadString('\n')
 			words := strings.Fields(text)
 			if len(words) < 1 {

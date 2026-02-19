@@ -1,4 +1,4 @@
-package PaxiBFT
+package PaxiDB
 
 import (
 	"bytes"
@@ -10,7 +10,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/log"
 )
 
 var scheme = flag.String("transport", "tcp", "transport scheme (tcp, udp, chan), default tcp")

@@ -1,4 +1,4 @@
-package PaxiBFT
+package PaxiDB
 
 import (
 	"encoding/json"
@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/log"
 )
 
 // http request header names

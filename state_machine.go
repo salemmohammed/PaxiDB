@@ -1,4 +1,4 @@
-package PaxiBFT
+package PaxiDB
 
 // StateMachine defines a deterministic state machine
 type StateMachine interface {

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/salemmohammed/PaxiBFT"
+	"github.com/salemmohammed/PaxiDB"
 )
 
 var file = flag.String("log", "log.csv", "")
@@ -13,7 +13,7 @@ var file = flag.String("log", "log.csv", "")
 func main() {
 	flag.Parse()
 
-	h := PaxiBFT.NewHistory()
+	h := PaxiDB.NewHistory()
 
 	err := h.ReadFile(*file)
 	if err != nil {

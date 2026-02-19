@@ -1,9 +1,9 @@
-package PaxiBFT
+package PaxiDB
 
 import (
 	"encoding/gob"
 	"fmt"
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/log"
 	"math/rand"
 	"net"
 	"time"

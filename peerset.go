@@ -1,9 +1,9 @@
-package PaxiBFT
+package PaxiDB
 
 import "C"
 
 import (
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/log"
 	"net"
 	"net/url"
 	"sync"

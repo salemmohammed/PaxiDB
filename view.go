@@ -1,8 +1,8 @@
-package PaxiBFT
+package PaxiDB
 
 import (
 	"fmt"
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/log"
 	"math"
 	"strconv"
 	"strings"

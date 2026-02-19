@@ -1,10 +1,10 @@
-package PaxiBFT
+package PaxiDB
 
 import (
 	"math"
 	"time"
 
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/log"
 )
 
 // Policy defines a trigger for data access patterns, that can be used in data migration protocols

@@ -1,11 +1,11 @@
-package PaxiBFT
+package PaxiDB
 
 import (
 	"encoding/gob"
 	"encoding/json"
 	"io"
 
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/log"
 )
 
 // Codec interface provide methods for serialization and deserialization

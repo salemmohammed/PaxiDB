@@ -1,7 +1,7 @@
-package PaxiBFT
+package PaxiDB
 
 import (
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/log"
 	"math"
 	"math/rand"
 	"sync"

@@ -1,1 +1,4 @@
-github.com/salemmohammed/BigBFT v0.0.0-20210424031626-bb2a005bbd55 h1:MYXUiWntCQB6e+ucwgYyCAMAN7cj9I3YUC9SKoSXld4=
+github.com/ailidani/paxi v0.0.0-20231229063542-6823d0b0fb16 h1:xFs8puXwyBQRVaNePARXWC+dqDLy9fcvxzFUW2sbYZU=
+github.com/ailidani/paxi v0.0.0-20231229063542-6823d0b0fb16/go.mod h1:kfxiU5NfDNpLLlxizGRKvkKzdDQwrMF5hA+LcBOyZ+Y=
+github.com/salemmohammed/PaxiBFT v0.0.0-20250410183204-174bcd036079 h1:Y8RuoT0ZYlODsUTMBC9uMNaPTke9dlhoFtTa8e2E7xk=
+github.com/salemmohammed/PaxiBFT v0.0.0-20250410183204-174bcd036079/go.mod h1:aqdCGZC6NrnUYg6cdTLpEp613Ph1ZeotXTngtJnVWbU=

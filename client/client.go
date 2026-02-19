@@ -3,10 +3,10 @@ package main
 import (
 	//"encoding/binary"
 	"flag"
-	"github.com/salemmohammed/PaxiBFT/log"
-	"github.com/salemmohammed/PaxiBFT/paxos"
+	"github.com/salemmohammed/PaxiDB/log"
+	"github.com/salemmohammed/PaxiDB/paxos"
 
-	"github.com/salemmohammed/PaxiBFT"
+	"github.com/salemmohammed/PaxiDB"
 )
 
 var id = flag.String("id", "", "node id this client connects to")
@@ -17,7 +17,7 @@ var delta = flag.Int("delta", 0, "value of delta.")
 
 
 type db struct {
-	PaxiBFT.Client
+	PaxiDB.Client
 }
 
 func (d *db) Init() error {
@@ -30,7 +30,7 @@ func (d *db) Stop() error {
 
 
 func (d *db) Write(k int, v []byte) error {
-	key := PaxiBFT.Key(k)
+	key := PaxiDB.Key(k)
 	//value := make([]byte, binary.MaxVarintLen64)
 	//value := make([]byte, 10000)
 	//binary.ByteOrder(v)
@@ -41,41 +41,21 @@ func (d *db) Write(k int, v []byte) error {
 }
 
 func main() {
-	PaxiBFT.Init()
+	PaxiDB.Init()
 
 	if *master != "" {
-		PaxiBFT.ConnectToMaster(*master, true, PaxiBFT.ID(*id))
+		PaxiDB.ConnectToMaster(*master, true, PaxiDB.ID(*id))
 	}
 
 	d := new(db)
 	switch *algorithm {
-	case "tendermint":
-		d.Client = PaxiBFT.NewHTTPClient(PaxiBFT.ID(*id))
-	case "tendermintBFT":
-		d.Client = PaxiBFT.NewHTTPClient(PaxiBFT.ID(*id))
-	case "tendStar":
-		d.Client = PaxiBFT.NewHTTPClient(PaxiBFT.ID(*id))
-	case "hotstuff":
-		d.Client = PaxiBFT.NewHTTPClient(PaxiBFT.ID(*id))
-	case "HotStuff_SL":
-		d.Client = PaxiBFT.NewHTTPClient(PaxiBFT.ID(*id))
-	case "hotstuffBFT":
-		d.Client = PaxiBFT.NewHTTPClient(PaxiBFT.ID(*id))
-	case "pbft":
-		d.Client = PaxiBFT.NewHTTPClient(PaxiBFT.ID(*id))
-	case "pbftBFT":
-		d.Client = PaxiBFT.NewHTTPClient(PaxiBFT.ID(*id))
-	case "streamlet":
-		d.Client = PaxiBFT.NewHTTPClient(PaxiBFT.ID(*id))
-	case "streamletBFT":
-		d.Client = PaxiBFT.NewHTTPClient(PaxiBFT.ID(*id))
 	case "paxos":
-		d.Client = paxos.NewClient(PaxiBFT.ID(*id))
+		d.Client = paxos.NewClient(PaxiDB.ID(*id))
 	default:
-		d.Client = PaxiBFT.NewHTTPClient(PaxiBFT.ID(*id))
+		d.Client = PaxiDB.NewHTTPClient(PaxiDB.ID(*id))
 	}
 
-	b := PaxiBFT.NewBenchmark(d)
+	b := PaxiDB.NewBenchmark(d)
 	if *load {
 		log.Debugf("Load in Clinet is started")
 		b.Load()

@@ -2,8 +2,8 @@ package paxos
 
 import (
 	"flag"
-	"github.com/salemmohammed/PaxiBFT"
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB"
+	"github.com/salemmohammed/PaxiDB/log"
 	"strconv"
 	"time"
 )
@@ -20,16 +20,16 @@ const (
 
 // Replica for one Paxos instance
 type Replica struct {
-	PaxiBFT.Node
+	PaxiDB.Node
 	*Paxos
 }
 
 // NewReplica generates new Paxos replica
-func NewReplica(id PaxiBFT.ID) *Replica {
+func NewReplica(id PaxiDB.ID) *Replica {
 	r := new(Replica)
-	r.Node = PaxiBFT.NewNode(id)
+	r.Node = PaxiDB.NewNode(id)
 	r.Paxos = NewPaxos(r)
-	r.Register(PaxiBFT.Request{}, r.handleRequest)
+	r.Register(PaxiDB.Request{}, r.handleRequest)
 	r.Register(P1a{}, r.HandleP1a)
 	r.Register(P1b{}, r.HandleP1b)
 	r.Register(P2a{}, r.HandleP2a)
@@ -38,12 +38,12 @@ func NewReplica(id PaxiBFT.ID) *Replica {
 	return r
 }
 
-func (r *Replica) handleRequest(m PaxiBFT.Request) {
+func (r *Replica) handleRequest(m PaxiDB.Request) {
 	log.Debugf("Replica %s received %v\n", r.ID(), m)
 
 	if m.Command.IsRead() && *read != "" {
 		v, inProgress := r.readInProgress(m)
-		reply := PaxiBFT.Reply{
+		reply := PaxiDB.Reply{
 			Command:    m.Command,
 			Value:      v,
 			Properties: make(map[string]string),
@@ -64,7 +64,7 @@ func (r *Replica) handleRequest(m PaxiBFT.Request) {
 	}
 }
 
-func (r *Replica) readInProgress(m PaxiBFT.Request) (PaxiBFT.Value, bool) {
+func (r *Replica) readInProgress(m PaxiDB.Request) (PaxiDB.Value, bool) {
 	// TODO
 	// (1) last slot is read?
 	// (2) entry in log over writen

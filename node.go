@@ -1,11 +1,11 @@
-package PaxiBFT
+package PaxiDB
 
 import (
 	"net/http"
 	"reflect"
 	"sync"
 
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/log"
 )
 
 // Node is the primary access point for every replica

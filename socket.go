@@ -1,11 +1,11 @@
-package PaxiBFT
+package PaxiDB
 
 import (
 	"math/rand"
 	"sync"
 	"time"
 
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/log"
 )
 
 // Socket integrates all networking interface and fault injections

@@ -1,4 +1,4 @@
-package PaxiBFT
+package PaxiDB
 
 import "C"
 import (
@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/salemmohammed/PaxiBFT/lib"
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/lib"
+	"github.com/salemmohammed/PaxiDB/log"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -73,7 +73,6 @@ func (c *HTTPClient) Put(key Key, value Value) error {
 	return err
 }
 func (c *HTTPClient) PutMUL(key Key, value Value) error {
-	log.Debugf("<----------------PutMUL---------------->")
 	i  := 0
 	errs := make(chan error, 0)
 	c.Count++
@@ -100,7 +99,6 @@ func (c *HTTPClient) PutMUL(key Key, value Value) error {
 	}
 	log.Debugf("errors %v ", errors)
 	//log.Debugf("c.MyList %v ", c.MyList)
-	fmt.Println("----------------Done PutMUL---------------->")
 	return errors[0]
 }
 func (c *HTTPClient) GetURL(id ID, key Key) string {

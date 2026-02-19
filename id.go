@@ -1,10 +1,10 @@
-package PaxiBFT
+package PaxiDB
 
 import (
 	"strconv"
 	"strings"
 
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/log"
 )
 
 // ID represents a generic identifier in format of Zone.Node

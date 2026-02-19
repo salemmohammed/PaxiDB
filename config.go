@@ -1,11 +1,11 @@
-package PaxiBFT
+package PaxiDB
 
 import (
 	"encoding/json"
 	"flag"
 	"os"
 
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/log"
 )
 
 var configFile = flag.String("config", "config.json", "Configuration file for paxi replica. Defaults to config.json.")

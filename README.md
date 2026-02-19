@@ -1,93 +1,116 @@
-# PaxiBFT
+# PaxiDB
 
-**PaxiBFT** is a modular and extensible framework written in Go for implementing, benchmarking, and evaluating Byzantine Fault Tolerant (BFT) consensus protocols. It provides a unified environment for testing and comparing BFT protocols under standardized conditions.
+**PaxiDB** is a modular and extensible framework written in Go for implementing, benchmarking, and evaluating consensus protocols. It provides a unified environment for testing and comparing protocols under standardized conditions.
 
 ## Overview
 
 This framework helps researchers and engineers to:
 
-- Implement new BFT protocols or extend existing ones.
+- Implement new consensus protocols or extend existing ones.
 - Benchmark different protocols using the same environment.
 - Analyze performance metrics like latency, throughput, and commit rate.
 
 ## Implemented Protocols
 
-- PBFT
 - Paxos
-- Tendermint
-- Streamlet
-- HotStuff
 
 Each protocol is implemented as a pluggable module with a standard interface.
 
+## Requirements
+
+- Go 1.15+
+
 ## Installation
 
-Requires Go 1.17+.
+```bash
+git clone https://github.com/salemmohammed/Distributed_DB.git
+cd Distributed_DB
+```
+
+## Build
+
+Run the build script from inside the `bin/` directory:
 
 ```bash
-git clone https://github.com/salemmohammed/PaxiBFT.git
-cd PaxiBFT
-go mod tidy
+cd bin
+./build.sh
+```
+
+This compiles the server, client, and cmd binaries.
+
+## Configuration
+
+Before running, make sure `config.json` is present in the directory you run the server from. A sample config is provided in `bin/config.json`. Copy it to the repo root:
+
+```bash
+cp bin/config.json .
+```
+
+The config defines node addresses, HTTP endpoints, and benchmark settings:
+
+```json
+{
+    "address": {
+        "1.1": "tcp://127.0.0.1:1735",
+        "1.2": "tcp://127.0.0.1:1736",
+        "1.3": "tcp://127.0.0.1:1737",
+        "1.4": "tcp://127.0.0.1:1738"
+    },
+    "http_address": {
+        "1.1": "http://127.0.0.1:8080",
+        "1.2": "http://127.0.0.1:8081",
+        "1.3": "http://127.0.0.1:8082",
+        "1.4": "http://127.0.0.1:8083"
+    },
+    "policy": "majority",
+    "threshold": 3,
+    "benchmark": {
+        "T": 60,
+        "N": 0,
+        "K": 1000,
+        "W": 1,
+        "Concurrency": 1,
+        "Distribution": "uniform"
+    }
+}
 ```
 
 ## Usage
 
-Run a protocol with default parameters:
+Run a server node from the repo root:
 
 ```bash
-go run main.go -protocol=pbft -nodes=4 -f=1
+go run ./server/server.go -id <node_id> -algorithm <protocol>
 ```
 
 **Flags:**
-- `-protocol`: One of `pbft`, `paxos`, `hotstuff`, `streamlet`, `tendermint`
-- `-nodes`: Number of nodes (e.g., 4)
-- `-f`: Number of tolerated Byzantine faults
 
-## Configuration
+- `-id`: Node ID matching one of the IDs in `config.json` (e.g., `1.1`, `1.2`)
+- `-algorithm`: One of `pbft`, `paxos`, `tendermint`, `streamlet`
 
-You can configure experiments via a YAML file in the `config/` directory:
+**Example — running a 4-node Paxos cluster:**
 
-```yaml
-protocol: pbft
-nodes: 4
-faults: 1
-message_size: 256
-block_size: 10
-duration: 60  # seconds
-```
-
-## Output Format
-
-PaxiBFT produces logs with the following metrics (in `logs/` folder):
-
-- `throughput` (tx/sec)
-- `latency_avg_ms`
-- `view_changes`
-- `commit_rate`
-- `bandwidth_usage`
-
-Example output (`.json` or `.csv`):
-
-```json
-{
-  "protocol": "PBFT",
-  "nodes": 4,
-  "throughput": 950,
-  "latency_avg_ms": 15.2,
-  "view_changes": 0,
-  "duration_s": 60
-}
-```
-
-## Example
-
-To run Tendermint for 60 seconds with 4 nodes:
+Open 4 terminals and run one command in each:
 
 ```bash
-go run main.go -protocol=tendermint -nodes=4 -duration=60
+# Terminal 1
+go run ./server/server.go -id 1.1 -algorithm paxos
+
+# Terminal 2
+go run ./server/server.go -id 1.2 -algorithm paxos
+
+# Terminal 3
+go run ./server/server.go -id 1.3 -algorithm paxos
+
+# Terminal 4
+go run ./server/server.go -id 1.4 -algorithm paxos
 ```
 
-Check the `logs/` directory for results.
+Then run the client:
+
+```bash
+go run ./client/client.go
+```
 
 ## Publications
 
@@ -99,4 +122,3 @@ This framework is featured in:
 ## Contributing
 
 We welcome contributions! Please open an issue or submit a pull request to get started.
-

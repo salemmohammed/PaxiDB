@@ -1,9 +1,9 @@
-package PaxiBFT
+package PaxiDB
 
 import (
 	"sort"
 
-	"github.com/salemmohammed/PaxiBFT/lib"
+	"github.com/salemmohammed/PaxiDB/lib"
 )
 
 // A simple linearizability checker based on https://pdos.csail.mit.edu/6.824/papers/fb-consistency.pdf

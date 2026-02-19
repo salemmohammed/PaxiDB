@@ -1,4 +1,4 @@
-package PaxiBFT
+package PaxiDB
 
 import "fmt"
 

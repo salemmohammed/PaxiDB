@@ -1,6 +1,6 @@
-package PaxiBFT
+package PaxiDB
 
-import "github.com/salemmohammed/PaxiBFT/log"
+import "github.com/salemmohammed/PaxiDB/log"
 
 // Quorum records each acknowledgement and check for different types of quorum satisfied
 type Quorum struct {

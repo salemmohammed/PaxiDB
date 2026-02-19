@@ -1,10 +1,10 @@
-package PaxiBFT
+package PaxiDB
 
 import (
 	"flag"
 	"net/http"
 
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/log"
 )
 
 // Init setup paxi package

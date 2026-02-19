@@ -1,10 +1,10 @@
-package PaxiBFT
+package PaxiDB
 
 import (
 	"sync"
 	"testing"
 
-	"github.com/salemmohammed/PaxiBFT/log"
+	"github.com/salemmohammed/PaxiDB/log"
 )
 
 type FakeDB struct {
